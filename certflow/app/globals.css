@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+/* ---------- Design tokens (CertFlow palette) ---------- */
+@theme inline {
+  --color-cf-bg: #050816;
+  --color-cf-bg2: #081126;
+  --color-cf-brand: #3b82f6;
+  --color-cf-electric: #60a5fa;
+  --color-cf-cyan: #67e8f9;
+  --color-cf-fg: #f8fafc;
+  --color-cf-muted: #a7b4cc;
+  --color-cf-line: rgba(148, 163, 184, 0.2);
+  --color-cf-ok: #34d399;
+  --color-cf-bad: #f87171;
+  --color-cf-warn: #fbbf24;
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade-in: fade-in 0.6s ease-out both;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  background: #050816;
+}
+
+body {
+  /* No body background: the fixed ASCII layer (z-index -1) must show above the html canvas colour. */
+  color: #f8fafc;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(96, 165, 250, 0.35);
+}
+
+/* ---------- Glass surfaces ----------
+   Deliberately translucent so the ASCII canvas stays visible behind panels. */
+.glass {
+  background: rgba(8, 17, 38, 0.38);
+  -webkit-backdrop-filter: blur(10px) saturate(1.1);
+  backdrop-filter: blur(10px) saturate(1.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-strong {
+  background: rgba(6, 12, 30, 0.62);
+  -webkit-backdrop-filter: blur(14px) saturate(1.1);
+  backdrop-filter: blur(14px) saturate(1.1);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.glass-subtle {
+  background: rgba(8, 17, 38, 0.22);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-field {
+  background: rgba(5, 8, 22, 0.55);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+.glow-cta {
+  box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.4), 0 6px 28px -8px rgba(59, 130, 246, 0.7);
+}
+
+/* Visible keyboard focus everywhere */
+:focus-visible {
+  outline: 2px solid #67e8f9;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Range inputs */
+input[type="range"].cf-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.3);
+  width: 100%;
+  cursor: pointer;
+}
+input[type="range"].cf-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #60a5fa;
+  border: 2px solid #050816;
+  box-shadow: 0 0 0 1px #60a5fa;
+}
+input[type="range"].cf-range::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #60a5fa;
+  border: 2px solid #050816;
+}
+
+/* Thin scrollbars inside panels */
+.cf-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.4) transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
